@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import ListTodo, DetailTodo
+from .views import ListTodo, DetailTodo, CreateTodo
 
 urlpatterns = [
     path('<int:pk>/', DetailTodo.as_view(), name='detail-todo'),
     path('', ListTodo.as_view(), name='list-todo'),
+    path('create/', CreateTodo.as_view(), name='create-todo'),
 
 ]
