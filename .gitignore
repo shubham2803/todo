@@ -1,0 +1,6 @@
+*.pyc
+__pycache
+db.env
+.env
+migrations
+static
