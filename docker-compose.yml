@@ -1,11 +1,12 @@
-version: '3.8'
+version: '3.3'
 
 services:
   web:
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn todo_project.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn todo_project.wsgi:application -b 0.0.0.0:8000 --timeout 900 --chdir=/home/app/web --log-level debug --log-file -
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
@@ -16,6 +17,7 @@ services:
     depends_on:
       - db
   db:
+    command: postgres -c max_connections=100
     image: postgres:13.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
